@@ -23,8 +23,8 @@ function handleForm(event) {
   }; // put the form's input values into a new object. Add the nextEntryID to the object.
   data.nextEntryId++; // Increment the nextEntryId on the data model.
   data.entries.unshift(userInput); // The task list says, 'prepend' which means - to add to the front of.
+  imageElement.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-  imageElement.setAttribute('src', imageUrl);
 }
 
 $photoElement.addEventListener('change', handleImage);
