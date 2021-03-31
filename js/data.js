@@ -13,11 +13,8 @@ if (previousToDoJSON !== null) {
   data = JSON.parse(previousToDoJSON);
 }
 
-// event listener beforeUnload
 window.addEventListener('beforeunload', function (event) {
-  event.preventDefault();
-  // stringify data
+  event.submit();
   var transformToJSON = JSON.stringify(data);
   localStorage.setItem('code-journal', transformToJSON);
-  // localStorage.setItem('thing', JSON data)
 });
