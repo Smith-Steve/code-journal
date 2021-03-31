@@ -16,9 +16,38 @@
 </head>
 <body>
   <header>
+    <div class="container">
+          <div class="row">
+            <div class="col header">
+              <h2>Code Journal</h2>
+            </div>
+          </div>
+    </div>
   </header>
-  <main>
-  </main>
+  <div class="container" data-view="entry-form">
+    <form id="data-entry-form">
+      <h1>New Entry</h1>
+      <img src="images/placeholder-image-square.jpg" width="400px" height="400px">
+      <label for="title"><span class="indented-title">Title</span></label>
+      <input required
+        name="title"
+        type="text"
+        id="title">
+      <label for="photo_url"><span>Photo URL</span></label>
+      <input required
+       name="photo_url"
+       type="text"
+       id="photo_url">
+      <label for="notes"><span>Notes</span></label>
+      <textarea
+       required
+       rows="5"
+       name="notes"
+       id="notes">
+      </textarea>
+      <button type="submit" class="button1">SAVE</button>
+    </form>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
