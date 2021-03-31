@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="> <!--- I tried "Font Awesome 5 Brands" and every permeatation therof. I could not get this font to work.-->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <header>
     <div class="container">
-          <div class="row">
-            <div class="col header">
-              <h2>Code Journal</h2>
-            </div>
-          </div>
+      <div class="row">
+        <div class="column-full header">
+          <h2>Code Journal</h2>
+        </div>
+      </div>
     </div>
   </header>
   <div class="container" data-view="entry-form">
     <form id="data-entry-form">
-      <h1>New Entry</h1>
-      <img src="images/placeholder-image-square.jpg" width="400px" height="400px">
-      <label for="title"><span class="indented-title">Title</span></label>
-      <input required
-        name="title"
-        type="text"
-        id="title">
-      <label for="photo_url"><span>Photo URL</span></label>
-      <input required
-       name="photo_url"
-       type="text"
-       id="photo_url">
-      <label for="notes"><span>Notes</span></label>
-      <textarea
-       required
-       rows="5"
-       name="notes"
-       id="notes">
-      </textarea>
-      <button type="submit" class="button1">SAVE</button>
+      <div class="row">
+        <div class="column-full">
+          <h1>New Entry</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-half">
+          <img src="images/placeholder-image-square.jpg">
+        </div>
+        <div class="column-half">
+          <label for="title"><span class="indented-title"><b>Title</b></span></label>
+          <input required name="title" type="text" id="title">
+          <label for="photo_url"><span><b>Photo URL</b></span></label>
+          <input required name="photo_url" type="text" id="photo_url">
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <label for="notes"><span><b>Notes</b></span></label>
+          <textarea required rows="5" name="notes" id="notes"></textarea>
+          <div class="align-right">
+            <button type="submit" class="button1">SAVE</button>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
