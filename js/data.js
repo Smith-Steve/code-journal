@@ -15,6 +15,7 @@ if (previousToDoJSON !== null) {
 
 // event listener beforeUnload
 window.addEventListener('beforeunload', function (event) {
+  event.preventDefault();
   // stringify data
   var transformToJSON = JSON.stringify(data);
   localStorage.setItem('code-journal', transformToJSON);

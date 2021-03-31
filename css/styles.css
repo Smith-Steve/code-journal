@@ -12,9 +12,7 @@ h2 {
 }
 
 #data-entry-form {
-  border: 1px;
   border-radius: 0.25rem;
-  justify-content: left;
   background-color: rgb(240, 240, 240);
   position: absolute;
 }
@@ -29,9 +27,6 @@ header {
 
 span {
   display: block;
-}
-
-b {
   margin-bottom: 0.75rem;
 }
 
