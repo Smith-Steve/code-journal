@@ -14,7 +14,6 @@ if (previousToDoJSON !== null) {
 }
 
 window.addEventListener('beforeunload', function (event) {
-  event.submit();
   var transformToJSON = JSON.stringify(data);
   localStorage.setItem('code-journal', transformToJSON);
 });
