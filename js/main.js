@@ -5,6 +5,8 @@ var $photoElement = document.getElementById('photo_url');
 var $form = document.getElementById('data-entry-form');
 var imageElement = document.querySelector('img');
 var imageUrl = 'images/placeholder-image-square.jpg';
+var $containerNodeList = document.querySelectorAll('.container');
+var $button = document.getElementById('button1');
 
 var $lineItem = document.querySelector('ul');
 
@@ -68,19 +70,33 @@ function renderEntry(entry) {
   createdRow.appendChild(CreatedHalfColumnTwo);
 
   finalProduct.appendChild(createdRow);
-
   return finalProduct;
 
 }
 
-function renderEntries() {
-  for (var i = 0; i < data.entries; i++) {
+function renderEntries(event) {
+  for (var i = 0; i < data.entries.length; i++) {
     var card = renderEntry(data.entries[i]);
-
     $lineItem.appendChild(card);
+  }
+}
+
+function handleViewChange(event) {
+
+  // no guard for the moment, not sure what I should block against since
+  // the situation is digital in nature.
+
+  for (let k = 0; k < $containerNodeList.length; k++) {
+    var nodeItem = $containerNodeList[k];
+    if (nodeItem === event.target) {
+      nodeItem.setAttribute('class', 'container');
+    } else {
+      nodeItem.setAttribute('class', 'container hidden');
+    }
   }
 }
 
 $photoElement.addEventListener('change', handleImage);
 $form.addEventListener('submit', handleForm);
-$lineItem.addEventListener('DOMContentLoaded', renderEntries);
+window.addEventListener('DOMContentLoaded', renderEntries);
+$button.addEventListener('click', handleViewChange);

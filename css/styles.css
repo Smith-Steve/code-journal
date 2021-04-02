@@ -15,8 +15,16 @@ li {
   list-style: none;
 }
 
-h2 {
+h2,
+h3.header {
   color: white;
+  display: inline-block; /* This is set up for the navigation bar. */
+  margin-left: 2rem;
+}
+
+a {
+  display: inline-block;
+  margin-left: 2rem;
 }
 
 #data-entry-form {

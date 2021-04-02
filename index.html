@@ -19,7 +19,10 @@
     <div class="container">
       <div class="row">
         <div class="column-full header">
-          <h2>Code Journal</h2>
+          <div class="topnav">
+            <h2>Code Journal</h2><a class="#entries"><h3 class="header">Entries</h3></a>
+
+          </div>
         </div>
       </div>
     </div>
@@ -53,26 +56,16 @@
       </div>
     </form>
   </div>
-  <div class="container visible" data-view="entries"> <!--- Add a sibling div[data-view="entries"]-->
+  <div class="container" data-view="entries"> <!--- Add a sibling div[data-view="entries"]-->
     <div class="row">
       <div class="column-full">
-        <h1>Entries</h1><div class="align-right"><button type="submit" class="button1">NEW</button></div>
+        <h1>Entries</h1><div class="align-right"><button type="submit" id="button1">NEW</button></div>
       </div>
     </div>
       <div class="row">
         <div class="column-full">
           <ul>
-            <li>
-              <div class="row">
-                <div class="column-half">
-                  <img src="images/placeholder-image-square.jpg">
-                </div>
-                  <div class="column-half">
-                    <h3>Ada Lovelace</h3>
-                    <p>Ex pyschotic freakazoid. We're going about the place doing things. Wow. Such doge. Wow. Wow!</p>
-                    </div>
-              </div>
-            </li>
+
           </ul>
         </div>
       </div>
