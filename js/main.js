@@ -7,6 +7,7 @@ var imageElement = document.querySelector('img');
 var imageUrl = 'images/placeholder-image-square.jpg';
 var $containerNodeList = document.querySelectorAll('.container');
 var $button = document.getElementById('button1');
+// var $button2 = document.getElementById('button2');
 
 var $lineItem = document.querySelector('ul');
 
@@ -28,6 +29,7 @@ function handleForm(event) {
   data.nextEntryId++; // Increment the nextEntryId on the data model.
   data.entries.unshift(userInput); // The task list says, 'prepend' which means - to add to the front of.
   imageElement.setAttribute('src', 'images/placeholder-image-square.jpg');
+  viewEntries(event);
   $form.reset();
 }
 
@@ -76,12 +78,13 @@ function renderEntry(entry) {
 
 function renderEntries(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    var card = renderEntry(data.entries[i]);
+    var entry = data.entries[i];
+    var card = renderEntry(entry);
     $lineItem.appendChild(card);
   }
 }
 
-function handleViewChange(event) {
+function handleViewChange(event) { // This function allows us to view the form where we see NEW entries.
 
   // no guard for the moment, not sure what I should block against since
   // the situation is digital in nature.
@@ -93,10 +96,43 @@ function handleViewChange(event) {
     } else {
       nodeItem.setAttribute('class', 'container hidden');
     }
+
+    for (let i = 0; i < $containerNodeList.length; i++) {
+      var containerListItem = $containerNodeList[i];
+      if (containerListItem.getAttribute('data-view') === 'entry-form') {
+        containerListItem.setAttribute('class', 'container');
+      } else {
+        containerListItem.setAttribute('class', 'container hidden');
+      }
+    }
+
   }
+}
+
+function viewEntries(event) { //  This function allows us to view the entries that are present with
+  for (let i = 0; i < $containerNodeList.length; i++) {
+    var nodeItem = $containerNodeList[i];
+    if (nodeItem !== event.target) {
+      nodeItem.setAttribute('class', 'container hidden');
+    } else {
+      nodeItem.setAttribute('class', 'container');
+    }
+  }
+
+  for (let i = 0; i < $containerNodeList.length; i++) {
+    var targetContainerListItem = $containerNodeList[i];
+    if (targetContainerListItem.getAttribute('data-view') === 'entries') {
+      targetContainerListItem.setAttribute('class', 'container');
+    } else {
+      targetContainerListItem.setAttribute('class', 'container hidden');
+    }
+  }
+
+  renderEntries(); // we need to run this because when we revert back the view, I think it is pulling the old list - not the updated list with the new entry.
 }
 
 $photoElement.addEventListener('change', handleImage);
 $form.addEventListener('submit', handleForm);
 window.addEventListener('DOMContentLoaded', renderEntries);
 $button.addEventListener('click', handleViewChange);
+// $button2.addEventListener('click', viewEntries);
