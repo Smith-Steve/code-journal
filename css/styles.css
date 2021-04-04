@@ -4,11 +4,27 @@
 }
 
 body {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb#E5E5E5;
 }
 
-h2 {
+.hidden {
+  display: none;
+}
+
+li {
+  list-style: none;
+}
+
+h2,
+h3.header {
   color: white;
+  display: inline-block; /* This is set up for the navigation bar. */
+  margin-left: 2rem;
+}
+
+a {
+  display: inline-block;
+  margin-left: 2rem;
 }
 
 #data-entry-form {
@@ -40,10 +56,6 @@ textarea:focus {
   outline: none;
   border: 1px solid rgb(150, 66, 233);
   box-shadow: 0 0 1px 1px rgba(150, 66, 233, 0.6);
-}
-
-textarea:focus {
-  cursor: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css);
 }
 
 .align-right {
