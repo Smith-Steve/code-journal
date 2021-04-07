@@ -9,6 +9,9 @@ var $containerNodeList = document.querySelectorAll('.container');
 var $button = document.getElementById('button1');
 var $icon = document.getElementById('i');
 var $parentListener = document.getElementById('parent-listener');
+var $titleField = document.getElementById('title');
+var $photoField = document.getElementById('photo_url');
+var $notesField = document.getElementById('notes');
 
 var $lineItem = document.querySelector('.parent-of-entries');
 
@@ -147,6 +150,20 @@ function editEntries(event) {
   if (event.target.tagName === 'I') {
     handleViewChange(event);
     data.editing = entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      var entryObject = data.entries[i];
+      // console.log(entryObject)
+      if (entryObject.entryID == entryId) {
+        var title = entryObject.title;
+        var photo = entryObject.photo;
+        var notes = entryObject.notes;
+        $titleField.value = title;
+        $photoField.value = photo;
+        $notesField.value = notes;
+        handleImage(event);
+
+      }
+    }
   }
 }
 
