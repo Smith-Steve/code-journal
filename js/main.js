@@ -7,9 +7,10 @@ var imageElement = document.querySelector('img');
 var imageUrl = 'images/placeholder-image-square.jpg';
 var $containerNodeList = document.querySelectorAll('.container');
 var $button = document.getElementById('button1');
-// var $button2 = document.getElementById('button2');
+var $icon = document.getElementById('i');
+var $parentListener = document.getElementById('parent-listener');
 
-var $lineItem = document.querySelector('ul');
+var $lineItem = document.querySelector('.parent-of-entries');
 
 function handleImage(event) {
   if ($photoElement.value !== null) {
@@ -39,9 +40,11 @@ function renderEntry(entry) {
   var createdRow = document.createElement('div');
   var createdHalfColumnOne = document.createElement('div');
   var createdImage = document.createElement('img');
-  var CreatedHalfColumnTwo = document.createElement('div');
+  var createdHalfColumnTwo = document.createElement('div');
   var createdHeading = document.createElement('h3');
   var createdParagraphElement = document.createElement('p');
+
+  createdHeading.setAttribute('class', 'entry-heading');
 
   var headingThree = document.createTextNode(entry.title);
   var paragraph = document.createTextNode(entry.notes);
@@ -51,12 +54,14 @@ function renderEntry(entry) {
   // the order of our elements is - line item, div row, div column-half,
   // img, div.column-half, h3 (sibh), paragraph (sibs)
 
+  var pencilIcon = document.createElement('i');
+  pencilIcon.setAttribute('class', 'fa fa-pen');
   // line item needs no attribute.
   createdRow.setAttribute('class', 'row'); // div is set to row.
   createdHalfColumnOne.setAttribute('class', 'column-half'); // div is set to half column.
   createdImage.setAttribute('src', imageSourceFile); // img src is set w/ source image.
 
-  CreatedHalfColumnTwo.setAttribute('class', 'column-half'); // div is set to half column. (second)
+  createdHalfColumnTwo.setAttribute('class', 'column-half'); // div is set to half column. (second)
   // no need to set attributes to the header 3
   // no need to set attributes to the p element.
 
@@ -66,12 +71,16 @@ function renderEntry(entry) {
   createdHeading.appendChild(headingThree); // text added to heading.
   createdParagraphElement.appendChild(paragraph); // text added to paragraph element.
 
-  CreatedHalfColumnTwo.appendChild(createdHeading); // adding Paragraph to second half-column
-  CreatedHalfColumnTwo.appendChild(createdParagraphElement); // adding Paragraph to second-half column.
+  createdHalfColumnTwo.appendChild(createdHeading); // adding Paragraph to second half-column
 
-  createdRow.appendChild(CreatedHalfColumnTwo);
+  createdHalfColumnTwo.appendChild(pencilIcon);
+
+  createdHalfColumnTwo.appendChild(createdParagraphElement); // adding Paragraph to second-half column.
+  createdRow.appendChild(createdHalfColumnTwo);
 
   finalProduct.appendChild(createdRow);
+
+  finalProduct.setAttribute('data-entry-id', entry.entryID); // Adding the entry ID to each product. Doing it on the top most element.
   return finalProduct;
 
 }
@@ -131,8 +140,19 @@ function viewEntries(event) { //  This function allows us to view the entries th
   renderEntries(); // we need to run this because when we revert back the view, I think it is pulling the old list - not the updated list with the new entry.
 }
 
+function editEntries(event) {
+  console.log('event.target: ', event.target.tagName);
+  var closestCompleteEntryCard = event.target.closest('li');
+  var entryId = closestCompleteEntryCard.getAttribute('data-entry-id');
+  if (event.target.tagName === 'I') {
+    handleViewChange(event);
+    data.editing = entryId;
+  }
+}
+
 $photoElement.addEventListener('change', handleImage);
 $form.addEventListener('submit', handleForm);
 window.addEventListener('DOMContentLoaded', renderEntries);
 $button.addEventListener('click', handleViewChange);
-// $button2.addEventListener('click', viewEntries);
+
+$parentListener.addEventListener('click', editEntries);

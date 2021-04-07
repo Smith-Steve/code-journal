@@ -22,6 +22,17 @@ h3.header {
   margin-left: 2rem;
 }
 
+h3.entry-heading {
+  display: inline;
+  justify-content: space-between;
+}
+
+.fa-pen {
+  text-align: right;
+  display: inline-block;
+  float: right;
+}
+
 a {
   display: inline-block;
   margin-left: 2rem;
