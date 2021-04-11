@@ -12,6 +12,7 @@ var $parentListener = document.getElementById('parent-listener');
 var $titleField = document.getElementById('title');
 var $photoField = document.getElementById('photo_url');
 var $notesField = document.getElementById('notes');
+var entryId = 0;
 
 var $lineItem = document.querySelector('.parent-of-entries');
 
@@ -23,18 +24,37 @@ function handleImage(event) {
 }
 
 function handleForm(event) {
+  handleViewChange(event);
+  var boolHandleForm = (event.path[5].window.entryId !== 0); // entryId equals 0 at the time the form is submitted. We can therefore determine whether or not we are currently working with a form that is 'new' or 'used' based off of this criterion.
+  // we are then in an ideal place to work with a bool or whatever is best for a basic decision statement.
+  var entryArray = event.path[5].window.data.entries;
   event.preventDefault();
-  var userInput = {
-    title: $form.elements.title.value,
-    photo: $form.elements.photo_url.value,
-    notes: $form.elements.notes.value,
-    entryID: data.nextEntryId
-  }; // put the form's input values into a new object. Add the nextEntryID to the object.
-  data.nextEntryId++; // Increment the nextEntryId on the data model.
-  data.entries.unshift(userInput); // The task list says, 'prepend' which means - to add to the front of.
-  imageElement.setAttribute('src', 'images/placeholder-image-square.jpg');
-  viewEntries(event);
-  $form.reset();
+  if(boolHandleForm === true) {
+    var userInput = {
+      title: $form.elements.title.value,
+      photo: $form.elements.photo_url.value,
+      notes: $form.elements.notes.value,
+      entryID: entryId }
+    for (var i = 0; i < entryArray.length; i++) {
+      var entry = entryArray[i];
+      if (entry.entryID == entryId) { // these are two different data types so we have to do a 'double' equals instead of a triple.
+        entryArray.splice(i, 1, userInput);
+      }
+    }
+    viewEntries(event);
+    $form.reset();
+  } else {
+    var userInput = {
+      title: $form.elements.title.value,
+      photo: $form.elements.photo_url.value,
+      notes: $form.elements.notes.value,
+      entryID: data.nextEntryId }
+    data.nextEntryId++;
+    data.entries.unshift(userInput);
+    imageElement.setAttribute('src', 'images/placeholder-image-square.jpg');
+    viewEntries(event);
+    $form.reset();
+  }
 }
 
 function renderEntry(entry) {
@@ -144,9 +164,9 @@ function viewEntries(event) { //  This function allows us to view the entries th
 }
 
 function editEntries(event) {
-  console.log('event.target: ', event.target.tagName);
   var closestCompleteEntryCard = event.target.closest('li');
-  var entryId = closestCompleteEntryCard.getAttribute('data-entry-id');
+  entryId = closestCompleteEntryCard.getAttribute('data-entry-id');
+  console.log(event.view.data.entries);
   if (event.target.tagName === 'I') {
     handleViewChange(event);
     data.editing = entryId;
@@ -154,16 +174,18 @@ function editEntries(event) {
       var entryObject = data.entries[i];
       // console.log(entryObject)
       if (entryObject.entryID == entryId) {
-        var title = entryObject.title;
-        var photo = entryObject.photo;
-        var notes = entryObject.notes;
-        $titleField.value = title;
-        $photoField.value = photo;
-        $notesField.value = notes;
+        var titleEntry = entryObject.title;
+        var photoEntry = entryObject.photo;
+        var notesEntry = entryObject.notes;
+        $titleField.value = titleEntry;
+        $photoField.value = photoEntry;
+        $notesField.value = notesEntry;
         handleImage(event);
-
       }
     }
+
+    // end of function.
+    // This function fires. It changes views. And then it
   }
 }
 
